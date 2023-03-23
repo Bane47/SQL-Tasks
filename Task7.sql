@@ -90,15 +90,17 @@ from employee e full join Manager m  on e.mid=m.id
 select * from Complexview
 --2. Show the working of 'on delete cascade on update set default' for the above tables
 alter table Employee drop constraint fk_mid
-alter table employee add constraint fk_mid 
-foreign key (mid) references dbo.manager(id)
-on update cascade
+alter table employee add constraint fk_mid   default 103 for mid
+alter table employee add
+foreign key (mid) references manager(id)
+on update set default 
 on delete cascade 
-alter table employee with check check constraint fk_mid
 
 delete from manager where name = 'Dark seid'
 
+update manager set id=104 where id=100
 select * from employee
+select * from Manager
 
 
 
