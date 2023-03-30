@@ -12,9 +12,15 @@ HobbyName varchar(20) unique
 )
 
 create table errorbackup(
-errorID int,
-errorname varchar(20)
+errornumber int,
+errorstate int,
+errorseverity int,
+errormessage varchar(max),
+errorline int,
+time datetime
+
 )
+
 alter procedure sp_inserter(@ID int,@name varchar(20))
 as
 begin
@@ -24,7 +30,7 @@ insert into hobbies(HobbyID,HobbyName) values(@ID,@name)
 
 end try
 begin catch
-insert into errorbackup values(@ID,@name)
+insert into errorbackup values(error_number(),error_state(),error_severity(),error_message(),error_line(),getdate())
 print 'Duplicate values are not allowed'
 end catch
 end
