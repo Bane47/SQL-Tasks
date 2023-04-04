@@ -15,7 +15,7 @@ create trigger trigger1
 on students
 for insert,update,delete
 as begin
-if datepart(DW,GETDATE())=7
+if datepart(DW,GETDATE()) =7 or datepart(DW,GETDATE())=1
 begin
 print 'Restricted for saturday an sunday'
 rollback transaction
